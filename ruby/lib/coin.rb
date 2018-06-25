@@ -9,13 +9,7 @@ class Coin
 
   def change(amount)
     result = []
-    @coins.each do |c|
-      if amount >= c
-        count = (amount / c).floor
-        result.concat([c] * count)
-        amount -= (c * count)
-      end
-    end
+    @coins.each {|c| amount >= c ? (result << c; amount -= c; redo) : next }
     result
   end
 
